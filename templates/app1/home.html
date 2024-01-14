@@ -1,0 +1,88 @@
+
+{% extends 'app1/base.html' %}
+
+{% block content %}
+
+    <div class="container mb-3" >
+        <h2 style="display: inline-block;">Home Page</h2>
+        
+        <form method="GET"   action="{% url 'home' %}" style="display: inline-block; margin-left: 20px;">
+            <input type="text" name="q" placeholder="Search..." >
+            
+        </form>
+        {% if user.is_authenticated %}
+        
+        <h3 style="display: inline-block; float: right;"><a href="{% url 'profile_details' %}">
+            <img src='{{user.profile.img.url}}'  class="rounded-circle" style="width: 100px; height: 100px;" ></a>Hello {{user}}</h3>
+
+        {% endif %}
+    </div>
+
+    
+
+
+<div class="container">
+
+    <div class="row">
+        
+        <div class="col-3 py-4 mb-3" style="background-color: rgb(178, 229, 231);">
+
+            <div class="px-3 ">
+               <center> <h2>Topics</h2></center>
+                
+            </div>
+
+            <div class="px-3 pt-3">
+                <b><a style="text-decoration: none;;" href="{% url 'home' %}">All</a> <span style="float: right;">{{topic.count}}</span></b>
+                <hr>
+            </div>
+            {% for i in topic %}
+            <div class="px-3">
+                <b><a style="text-decoration: none;" href="{% url 'home'%}?q={{i.name}}">{{i.name}}</a><span style="float: right;">{{i.room_set.all.count}}</span></b>
+                <hr>
+            </div>
+            {% endfor %}
+        </div>
+
+
+
+        <div class="col">
+
+            <div class="container">
+                <h4>{{obj_count}} person availables</h4>
+            </div>
+                    <div>
+                    
+                    {% if key %}
+                        {% for i in key %}
+                        <div class="bg-info ps-3 pt-2">
+                            
+                            
+                            <img src='{{i.host.profile.img.url}}'  class="rounded-circle" style="width: 100px; height: 100px;" >
+                            <h2><a href="{% url 'owner' i.id %}" style="text-decoration: none;">{{i.name}}</a></h2>
+
+                            {% if user == i.host %}
+                            <p> <a href="{% url 'update' i.id %}" style="text-decoration: none;">Edit</a> 
+                                <a href="{% url 'delete' i.id %}" style="text-decoration: none;">Delete</a> </p>
+                            {% endif %}
+
+                            <small>{{i.created| date:'F,y'}}</small>
+                            <hr>
+                            <p class="pb-3">
+                            @{{i.host}}<br>
+                            {{i.description}}<br>
+                            <b>{{i.topic}}</b>
+
+                            </p>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+        </div>
+    
+    </div>                    
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+
+{% extends 'app1/base.html' %}
+
+{% block content %}
+
+<h2 class="container">Delete Page</h2>
+
+
+<div class="container">
+
+  
+    <form method="POST">
+        {% csrf_token %}    
+
+            <p>Are you sure want you delete '{{form}}'?</p>    
+
+            <a href="{{ request.META.HTTP_REFERER }}">Go Back</a>
+
+            <button type="submit">Confirm</button>
+
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+
+{% extends 'app1/base.html' %}
+
+{% block content %}
+
+<h2 class="container">Owner Page</h2>
+
+
+<div class="container">
+{% if key %}
+    
+    <div class="bg-info ps-3 pt-2">
+        <h2 style="display: inline-block;">{{key.name}}</h2>
+        <small style="display: inline-block;">{{key.created| timesince}} ago</small>
+        <hr>
+        <p class="pb-3">
+        {{key.host}}<br>
+        {{key.description}}
+        </p>
+
+
+        <div class="px-3 py-4 mb-5 mx-3 bg-primary">
+            <h3>Conversation</h3>
+            <hr>
+            {% for i in mess %}
+                <div style="background-color: white;" class="px-3 pt-2 mb-3 pb-1">
+                    <small style="display: inline-block;"><a href="">@{{i.user}}</a> {{i.created|timesince}} ago </small> 
+                    <a  style="display: inline-block; float: right;" href="{% url 'deletemessage' i.id%}">Delete</a>
+
+                    
+                    <p class="px-5 pt-2">{{i.body}}</p>
+                </div>
+            {% endfor %}
+
+            {% if user.is_authenticated %}
+            <div>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="text" placeholder="Write message..." name="boo">
+                </form>
+            </div>
+            {% endif %}
+
+        </div>
+        
+        
+
+    </div>
+    
+{% endif %}
+</div>
+
+{% endblock %}

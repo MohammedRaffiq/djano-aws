@@ -1,0 +1,26 @@
+{% extends 'app1/base.html' %}
+
+{% block content %}
+
+    <div class="container mb-3">
+        <h2 style="display: inline-block;">Profile Details</h2>
+
+        {% if user.is_authenticated %}
+            <h3 style="display: inline-block; float: right;">
+                <img src='{{user.profile.img.url}}' class="rounded-circle" style="width: 100px; height: 100px;">
+                Hello {{user}}
+            </h3>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            </br></br>
+            <button type="submit">Change Profile Picture</button>
+        </form>
+    </div>
+
+    <!-- Rest of your HTML content... -->
+
+{% endblock %}
+
