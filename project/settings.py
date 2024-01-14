@@ -87,16 +87,18 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',  # or 'django.db.backends.postgresql'
-#         'NAME': 'awspro',
-#         'USER': 'master',
-#         'PASSWORD': 'master123',
-#         'HOST': 'awspro.cpmu08c08apx.ap-south-1.rds.amazonaws.com',
-#         'PORT': '3306',  # Change if your RDS instance is using a different port
-#     }
-# }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',  # or 'django.db.backends.postgresql'
+        'NAME': 'djangoaws',
+        'USER': 'master',
+        'PASSWORD': 'master123',
+        'HOST': 'djangoaws.cpmu08c08apx.ap-south-1.rds.amazonaws.com',
+        'PORT': '5432 ',  # Change if your RDS instance is using a different port
+    }
+}
 
 
 # Password validation
